@@ -48,7 +48,7 @@ hist(data$MarApr_PA, add=T, prob=T, col=rgb(0, 1, 0, .25))
 lines(density(data$MarApr_PA))
 ```  
 ![alt text][hist-ab]  
-*Figure 2. Normal distribution of MarApr_AB*  
+*Figure 2. Normal distribution of MarApr_AB and MarApr_PA*  
 As shown in Figure 2, the variable **player's at bats in March and April 2016** is **normally distributed**. Other predictors also follow the normal distribution. Therefore, we impute means to corrupted values.
 ```r
 # Convert corruted data to NA
@@ -66,12 +66,36 @@ for (col in cols) {
     mean(batting[[col]], na.rm = T)
 }
 
-# Manual imputation for MarAprAVG
+# Manual imputation for MarApr_AVG
 batting$MarApr_AVG[is.na(batting$MarApr_AVG)] <- 
   mean(batting$MarApr_AVG, na.rm = T)
 ```  
-###
+### Multivariate Linear Regression
+Now, we build a predictive model with rescaled and imputed data points. Multivariate linear regression is used as follows.  
+```r  
+# Multivariate linear regression  
+model.1 <- lm(FullSeason_AVG ~ 
+            MarApr_AB + 
+            MarApr_PA + 
+            MarApr_H + 
+            MarApr_AVG, 
+          data)
+# Results  
+Coefficients:
+            Estimate Std. Error t value Pr(>|t|)  
+(Intercept) 1.70e-01   9.83e-02    1.73    0.086 .
+MarApr_AB   3.38e-04   1.29e-03    0.26    0.794  
+MarApr_PA   6.94e-05   4.33e-04    0.16    0.873  
+MarApr_H    6.83e-04   4.47e-03    0.15    0.879  
+MarApr_AVG  1.94e-01   3.67e-01    0.53    0.597  
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
 
+Residual standard error: 0.0237 on 127 degrees of freedom
+Multiple R-squared:  0.249,	Adjusted R-squared:  0.226 
+F-statistic: 10.5 on 4 and 127 DF,  p-value: 2.08e-07
+
+```  
 
 ##References  
 [1] What is WAR? (2016, November 14) Retrieved from [http://www.fangraphs.com/library/misc/war/](http://www.fangraphs.com/library/misc/war/)  

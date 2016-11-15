@@ -4,6 +4,7 @@
 # Candidate: Meen Chul Kim
 
 library('ggplot2')
+library('caret')
 
 # Read in data
 batting <- read.csv('data/batting.csv')
@@ -20,7 +21,7 @@ for (col in cols) {
 
 # Histogram the distributions of MarApr_AB and MarApr_PA
 hist(data$MarApr_AB, prob=T, xlim=c(1, 3), 
-     xlab='MarApr_AB', ylab = 'Probatilty', main='',
+     xlab='Scaled predictors', ylab = 'Probatilty', main='',
      col=rgb(1, 0, 0, .25))
 lines(density(data$MarApr_AB))
 hist(data$MarApr_PA, add=T, prob=T, col=rgb(0, 1, 0, .25))
@@ -44,9 +45,10 @@ for (col in cols) {
 batting$MarApr_AVG[is.na(batting$MarApr_AVG)] <- 
   mean(batting$MarApr_AVG, na.rm = T)
 
-fit <- lm(FullSeason_AVG ~ 
+# Multivariate linear regression
+model.1 <- lm(FullSeason_AVG ~ 
             MarApr_AB + 
             MarApr_PA + 
             MarApr_H + 
             MarApr_AVG, 
-          data=batting)
+          data)
