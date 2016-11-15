@@ -20,8 +20,16 @@ Deciding the promotion of a Minor League player can be understood as **a process
 Predict each player’s batting average at the end of the 2016 season given his batting statistics in March/April 2016.
 
 **A**.  
-
+### Initial Exploration of Data
+Before building a predictive model, we need to understand the characteristics of data such as data distribution, missing values, and outliers. It helps to build a more generalizable model. First, we read in the data set as batting.  
 ```r
 # Read in data
 batting <- read.csv('data/batting.csv')
-```
+```  
+The result shows batting consists of 146 observations of 6 variables while 14 data points are corrupted (See Table 1). We can decide whether to ignore these observations, based on the exploration of data distribution.  
+| Name | MarApr_AB | MarApr_PA | MarApr_H | MarApr_AVG | FullSeason_AVG |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| Charlie Blackmon | 0 | 0 | 0 | NA | 0.324 |
+| Jose Ramirez | 0 | 0 | 0 | NA | 0.312 |  
+*Table 1. Example of corrupted data*
+
