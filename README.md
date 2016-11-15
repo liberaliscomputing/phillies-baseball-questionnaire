@@ -21,15 +21,25 @@ Predict each player’s batting average at the end of the 2016 season given his 
 
 **A**.  
 ### Initial Exploration of Data
-Before building a predictive model, we need to understand the characteristics of data such as data distribution, missing values, and outliers. It helps to build a more generalizable model. First, we read in the data set as batting.  
+Before building a predictive model, we need to understand the characteristics of data such as data distribution, missing values, and outliers. It helps to build a more generalizable model. First, we read in the data set as **batting**.  
 ```r
 # Read in data
 batting <- read.csv('data/batting.csv')
 ```  
-The result shows batting consists of 146 observations of 6 variables while 14 data points are corrupted (See Table 1). We can decide whether to ignore these observations, based on the exploration of data distribution.  
-| Name | MarApr_AB | MarApr_PA | MarApr_H | MarApr_AVG | FullSeason_AVG |
-| --- | ---: | ---: | ---: | ---: | ---: |
-| Charlie Blackmon | 0 | 0 | 0 | NA | 0.324 |
-| Jose Ramirez | 0 | 0 | 0 | NA | 0.312 |  
-*Table 1. Example of corrupted data*
+The result shows **batting** consists of 146 observations of 6 variables while 14 data points are corrupted. We can decide whether to ignore these observations, based on the exploration of data distribution. To investigate the distributions, we need to copy **batting** to a new variable called **data** while only selecting rows without corrupted data. Then, histogram the distributions.  
+```r
+# Select rows without corrupted data
+data <- subset(batting, MarApr_AB != 0)
+
+# Histogram the distributions
+hist(data$column_name, prob=T, xlab='column_name', ylab = 'Probatilty')
+lines(density(data$column_name))
+```  
+![alt text][hist-ab]  
+*Figure 2. Normal distribution of MarApr_AB*  
+As show in Figure 2, 
+
+
+**Reference**
+[hist-ab]: https://github.com/liberaliscomputing/phillies-baseball-questionnaire/blob/master/figs/hist-ab.png
 
