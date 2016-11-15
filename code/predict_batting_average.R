@@ -9,16 +9,33 @@ batting <- read.csv('data/batting.csv')
 # Select rows without corrupted data
 data <- subset(batting, MarApr_AB != 0)
 
+# Scale variables by dividing by range
+data$MarApr_AB <- data$MarApr_AB / max(range(data$MarApr_AB))
+data$MarApr_PA <- data$MarApr_PA / max(range(data$MarApr_PA))
+data$MarApr_H  <- data$MarApr_H  / max(range(data$MarApr_H))
+
 # Histogram the distributions
 hist(data$MarApr_AB, prob=T, 
-     xlab='MarApr_AB', ylab = 'Probatilty')
+     xlab='MarApr_AB', ylab = 'Probatilty', main='')
 lines(density(data$MarApr_AB))
 
+# Convert corruted data to NA
+batting[batting == 0] <- NA
 
-data <- subset(batting, MarApr_AB != 0)
+# Scale variables
+batting$MarApr_AB <- batting$MarApr_AB / 
+  max(range(batting$MarApr_AB, na.rm = T)) 
+batting$MarApr_PA <- batting$MarApr_PA / 
+  max(range(batting$MarApr_PA, na.rm = T)) 
+batting$MarApr_H  <- batting$MarApr_H  / 
+  max(range(batting$MarApr_H , na.rm = T)) 
 
-MarApr.AB <- data[2] / max(range(data[2]))
-MarApr.PA <- data[3] / max(range(data[3]))
-MarApr.H <- data[4] / max(range(data[4]))
-new <- data.frame(data[1], MarApr.AB, MarApr.PA, MarApr.H, data[5], data[6])
-plot(new[2:6])
+# Impute means to NA
+batting$MarApr_AB[is.na(batting$MarApr_AB)] <- 
+  mean(batting$MarApr_AB, na.rm = T)
+batting$MarApr_PA[is.na(batting$MarApr_PA)] <- 
+  mean(batting$MarApr_PA, na.rm = T)
+batting$MarApr_H[is.na(batting$MarApr_H)] <- 
+  mean(batting$MarApr_H, na.rm = T)
+batting$MarApr_AVG[is.na(batting$MarApr_AVG)] <- 
+  mean(batting$MarApr_AVG, na.rm = T)
