@@ -3,6 +3,8 @@
 # Submission: November 15, 2016
 # Candidate: Meen Chul Kim
 
+library('ggplot2')
+
 # Read in data
 batting <- read.csv('data/batting.csv')
 
@@ -10,32 +12,41 @@ batting <- read.csv('data/batting.csv')
 data <- subset(batting, MarApr_AB != 0)
 
 # Scale variables by dividing by range
-data$MarApr_AB <- data$MarApr_AB / max(range(data$MarApr_AB))
-data$MarApr_PA <- data$MarApr_PA / max(range(data$MarApr_PA))
-data$MarApr_H  <- data$MarApr_H  / max(range(data$MarApr_H))
+cols <- c('MarApr_AB', 'MarApr_PA', 'MarApr_H')
+for (col in cols) {
+  data[[col]] <- data[[col]] / diff(range(data[[col]]))  
+}
 
-# Histogram the distributions
-hist(data$MarApr_AB, prob=T, 
-     xlab='MarApr_AB', ylab = 'Probatilty', main='')
+
+# Histogram the distributions of MarApr_AB and MarApr_PA
+hist(data$MarApr_AB, prob=T, xlim=c(1, 3), 
+     xlab='MarApr_AB', ylab = 'Probatilty', main='',
+     col=rgb(1, 0, 0, .25))
 lines(density(data$MarApr_AB))
+hist(data$MarApr_PA, add=T, prob=T, col=rgb(0, 1, 0, .25))
+lines(density(data$MarApr_PA))
 
 # Convert corruted data to NA
 batting[batting == 0] <- NA
 
 # Scale variables
-batting$MarApr_AB <- batting$MarApr_AB / 
-  max(range(batting$MarApr_AB, na.rm = T)) 
-batting$MarApr_PA <- batting$MarApr_PA / 
-  max(range(batting$MarApr_PA, na.rm = T)) 
-batting$MarApr_H  <- batting$MarApr_H  / 
-  max(range(batting$MarApr_H , na.rm = T)) 
+for (col in cols) {
+  batting[[col]] <- batting[[col]] / 
+    diff(range(batting[[col]], na.rm = T))
+}
 
 # Impute means to NA
-batting$MarApr_AB[is.na(batting$MarApr_AB)] <- 
-  mean(batting$MarApr_AB, na.rm = T)
-batting$MarApr_PA[is.na(batting$MarApr_PA)] <- 
-  mean(batting$MarApr_PA, na.rm = T)
-batting$MarApr_H[is.na(batting$MarApr_H)] <- 
-  mean(batting$MarApr_H, na.rm = T)
+for (col in cols) {
+  batting[[col]][is.na(batting[[col]])] <- 
+    mean(batting[[col]], na.rm = T)
+}
+# Manual imputation for MarApr_AVG
 batting$MarApr_AVG[is.na(batting$MarApr_AVG)] <- 
   mean(batting$MarApr_AVG, na.rm = T)
+
+fit <- lm(FullSeason_AVG ~ 
+            MarApr_AB + 
+            MarApr_PA + 
+            MarApr_H + 
+            MarApr_AVG, 
+          data=batting)
