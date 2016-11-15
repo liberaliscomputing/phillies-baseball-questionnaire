@@ -20,4 +20,8 @@ Deciding the promotion of a Minor League player can be understood as **a process
 Predict each player’s batting average at the end of the 2016 season given his batting statistics in March/April 2016.
 
 **A**.  
-TBA
+
+```r
+# Read in data
+batting <- read.csv('data/batting.csv')
+```
