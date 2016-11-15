@@ -63,4 +63,3 @@ plot(batting[2:6])
 # Remodel linear regression
 model.2 <- lm(FullSeason_AVG ~ MarApr_H + MarApr_AVG, batting)
 summary(model.2)
-
