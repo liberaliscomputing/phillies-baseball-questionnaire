@@ -37,7 +37,7 @@ for (col in cols) {
 }
 ```
 ### Data Imputation
-To fix corrupted data, we need to understand the distribution of data. If it is skewed, we can impute **median** to corrupted cells. If normally distributed, the **mean** imputation is the most intuitive way. 
+To fix corrupted data, we need to understand the distribution of data. If it is skewed, we can impute **median** to corrupted cells. If normally distributed, the **mean** imputation is the most intuitive way. Below code renders histograms of data distributions.   
 ```r
 # Histogram the distributions
 hist(data$MarApr_AB, prob=T, xlim=c(1, 3), 
@@ -103,7 +103,7 @@ plot(model.1)
 ```  
 ![alt text][diagnostic-plots]  
 *Figure 3. Diagnostic plots of the predictive model*  
-As shown in the result, all the variables do not have statistically significant in predicting batting average at the end of the season. The diagnostic visualization illustrates this regression model allows too many residuals in finding the fitting line (See Figure 3). By examining correlation plots between variables, we can evidence why this regression modeling is not satisfactory.  
+As shown in the results, all the variables do not have statistically significant in predicting batting average at the end of the season. The diagnostic visualization illustrates this regression model allows too many residuals in finding the fitting line (See Figure 3). By examining correlation plots between variables, we can evidence why this regression modeling is not satisfactory.  
 ```r  
 # Plot correlation
 plot(batting[2:6])
@@ -130,28 +130,13 @@ Residual standard error: 0.0236 on 129 degrees of freedom
 Multiple R-squared:  0.248,	Adjusted R-squared:  0.237 
 F-statistic: 21.3 on 2 and 129 DF,  p-value: 1e-08
 ```  
-**MarApr_H** is shown to be a significant predictor for the revised model (See the code box above). However, the predictive power of this variable is not very strong (slope: 0.002157). We compare the variances of the models. As described below, two models do not have statistcally significant difference, meaning both models are not very predictive.  
-```r   
-# Compare models
-anova(model.1, model.2)
-
-# Results
-Analysis of Variance Table
-
-Model 1: FullSeason_AVG ~ MarApr_AB + MarApr_PA + MarApr_H + MarApr_AVG
-Model 2: FullSeason_AVG ~ MarApr_H + MarApr_AVG
-  Res.Df    RSS Df Sum of Sq    F Pr(>F)
-1    127 0.0716                         
-2    129 0.0717 -2 -8.04e-05 0.07   0.93  
-```  
-
+With the revised model, **MarApr_H** is shown to be a significant predictor for the revised model (See the code box above). The predictive power became stronger (former slope: 6.83e-04, current slope: 0.002157) **MarApr_AVG** appears not to be statistically significant while having much enhanced predictive power (former slope: 1.94e-01, current slope: 0.074807).
+The predictions made by these two models are included in [the data sheet](https://github.com/liberaliscomputing/phillies-baseball-questionnaire/tree/master/data).  
 ## Conclusion
-
-
+In this questionnaire, I aimed to describe my analytical appraoches toward making accurate predcitions of batting average in the Major League. To this end, I explored the charicteristics of the data set. Based on this observations, predictors were scaled and corrupted data were imputed to make better predictive analytics. Results showed that the model consisdering all the variables has less predictive power. The revised model showed an enhanced capability in predicting batting average at the end of the season. For the future work, we need to employ more sohisticated variables such as Batting average on balls in play (BABIP) and WAR since they consider multiple aspects in play. 
+Complete code is available [here](https://github.com/liberaliscomputing/phillies-baseball-questionnaire/tree/master/code/predict_batting-average.R) 
 ## References  
 [1] What is WAR? (2016, November 14) Retrieved from [http://www.fangraphs.com/library/misc/war/](http://www.fangraphs.com/library/misc/war/)  
-[2]  
-[3]  
 [logistic-curve]: https://github.com/liberaliscomputing/phillies-baseball-questionnaire/blob/master/figs/logistic-curve.png
 [hist-ab]: https://github.com/liberaliscomputing/phillies-baseball-questionnaire/blob/master/figs/hist-ab.png
 [diagnostic-plots]: https://github.com/liberaliscomputing/phillies-baseball-questionnaire/blob/master/figs/diagnostic-plots.png
