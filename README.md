@@ -80,6 +80,7 @@ model.1 <- lm(FullSeason_AVG ~
             MarApr_H + 
             MarApr_AVG, 
           data)
+
 # Results  
 Coefficients:
             Estimate Std. Error t value Pr(>|t|)  
@@ -89,16 +90,23 @@ MarApr_PA   6.94e-05   4.33e-04    0.16    0.873
 MarApr_H    6.83e-04   4.47e-03    0.15    0.879  
 MarApr_AVG  1.94e-01   3.67e-01    0.53    0.597  
 ---
-Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+Signif. codes:  0'***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
 Residual standard error: 0.0237 on 127 degrees of freedom
 Multiple R-squared:  0.249,	Adjusted R-squared:  0.226 
 F-statistic: 10.5 on 4 and 127 DF,  p-value: 2.08e-07
 
+# Diagnostic plots 
+layout(matrix(c(1, 2, 3, 4), 2, 2)) 
+plot(model.1)
 ```  
+![alt text][diagnostic-plots]  
+*Figure 3. Diagnostic plots of the preictive model*  
 
-##References  
+
+
+## References  
 [1] What is WAR? (2016, November 14) Retrieved from [http://www.fangraphs.com/library/misc/war/](http://www.fangraphs.com/library/misc/war/)  
 [logistic-curve]: https://github.com/liberaliscomputing/phillies-baseball-questionnaire/blob/master/figs/logistic-curve.png
 [hist-ab]: https://github.com/liberaliscomputing/phillies-baseball-questionnaire/blob/master/figs/hist-ab.png
-
+[diagnostic-plots]: https://github.com/liberaliscomputing/phillies-baseball-questionnaire/blob/master/figs/diagnostic-plots.png

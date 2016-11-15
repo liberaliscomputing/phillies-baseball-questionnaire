@@ -52,3 +52,7 @@ model.1 <- lm(FullSeason_AVG ~
             MarApr_H + 
             MarApr_AVG, 
           data)
+
+# Diagnostic plots 
+layout(matrix(c(1, 2, 3, 4), 2, 2)) 
+plot(model.1)
