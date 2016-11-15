@@ -108,7 +108,7 @@ As shown in the result, all the variables do not have statistically significant 
 # Plot correlation
 plot(batting[2:6])
 ```  
-![alt text][Correlation plots]  
+![alt text][correlation-plots]  
 *Figure 4. Diagnostic plots of the predictive model*  
 Figure 4 displays correlation plots between predictors. As rendered in the figure, we can intuitively identify correlations among 1) **MarApr_AB**, **MarApr_PA**, and **MarApr_H** and 2) **MarApr_H** and **MarApr_AVG**. However, the dependent variable has weak correlations only with **MarApr_H** and **MarApr_AVG**. It is often argued that **considering too many variables with few trends causes less predictive analytics**. Based on this observation, we remodel linear regression, given two predictors.  
 ```r
@@ -155,4 +155,4 @@ Model 2: FullSeason_AVG ~ MarApr_H + MarApr_AVG
 [logistic-curve]: https://github.com/liberaliscomputing/phillies-baseball-questionnaire/blob/master/figs/logistic-curve.png
 [hist-ab]: https://github.com/liberaliscomputing/phillies-baseball-questionnaire/blob/master/figs/hist-ab.png
 [diagnostic-plots]: https://github.com/liberaliscomputing/phillies-baseball-questionnaire/blob/master/figs/diagnostic-plots.png
-[correlation]: https://github.com/liberaliscomputing/phillies-baseball-questionnaire/blob/master/figs/correlation.png
+[correlation-plots]: https://github.com/liberaliscomputing/phillies-baseball-questionnaire/blob/master/figs/correlation.png
