@@ -130,8 +130,8 @@ Residual standard error: 0.0236 on 129 degrees of freedom
 Multiple R-squared:  0.248,	Adjusted R-squared:  0.237 
 F-statistic: 21.3 on 2 and 129 DF,  p-value: 1e-08
 ```  
-With the revised model, **MarApr_H** is shown to be a significant predictor for the revised model (See the code box above). The predictive power became stronger (former slope: 6.83e-04, current slope: 0.002157). **MarApr_AVG** appears not to be statistically significant while having much enhanced predictive power (former slope: 1.94e-01, current slope: 0.074807).
-The predictions made by these two models are included in [the data sheet](https://github.com/liberaliscomputing/phillies-baseball-questionnaire/tree/master/data/batting.csv).  
+With the revised model, **MarApr_H** is shown to be a significant predictor for the revised model (See the code box above). The predictive power became stronger (former slope: 6.83e-04, current slope: 0.002157). **MarApr_AVG** appears not to be statistically significant while having more predictive power than **MarApr_H** (slope: 0.074807).
+The predictions made by these two models are included in [the data sheet](https://github.com/liberaliscomputing/phillies-baseball-questionnaire/tree/master/data/results.csv) (See the last two columns). 
 ## Conclusion
 In this questionnaire, I aimed to describe my analytical appraoches toward making accurate predcitions of batting average in the Major League. To this end, I explored the charicteristics of the data set. Based on this observations, predictors were scaled and corrupted data were imputed to make better predictive analytics. Results showed that the model consisdering all the variables has less predictive power. The revised model showed an enhanced capability in predicting batting average at the end of the season. For the future work, we need to employ more sohisticated variables such as Batting average on balls in play (BABIP) and WAR since they consider multiple aspects in play. 
 Complete code is available [here](https://github.com/liberaliscomputing/phillies-baseball-questionnaire/tree/master/code/predict_batting_average.R).
