@@ -79,9 +79,10 @@ model.1 <- lm(FullSeason_AVG ~
             MarApr_PA + 
             MarApr_H + 
             MarApr_AVG, 
-          data)
+          batting)
 
-# Results  
+# Results
+summary(model.1)  
 Coefficients:
             Estimate Std. Error t value Pr(>|t|)  
 (Intercept) 1.70e-01   9.83e-02    1.73    0.086 .
@@ -101,12 +102,57 @@ layout(matrix(c(1, 2, 3, 4), 2, 2))
 plot(model.1)
 ```  
 ![alt text][diagnostic-plots]  
-*Figure 3. Diagnostic plots of the preictive model*  
+*Figure 3. Diagnostic plots of the predictive model*  
+As shown in the result, all the variables do not have statistically significant in predicting batting average at the end of the season. The diagnostic visualization illustrates this regression model allows too many residuals in finding the fitting line (See Figure 3). By examining correlation plots between variables, we can evidence why this regression modeling is not satisfactory.  
+```r  
+# Plot correlation
+plot(batting[2:6])
+```  
+![alt text][Correlation plots]  
+*Figure 4. Diagnostic plots of the predictive model*  
+Figure 4 displays correlation plots between predictors. As rendered in the figure, we can intuitively identify correlations among 1) **MarApr_AB**, **MarApr_PA**, and **MarApr_H** and 2) **MarApr_H** and **MarApr_AVG**. However, the dependent variable has weak correlations only with **MarApr_H** and **MarApr_AVG**. It is often argued that **considering too many variables with few trends causes less predictive analytics**. Based on this observation, we remodel linear regression, given two predictors.  
+```r
+# Remodel linear regression
+model.2 <- lm(FullSeason_AVG ~ MarApr_H + MarApr_AVG, batting)
 
+# Results
+summary(model.2)
+Coefficients:
+            Estimate Std. Error t value Pr(>|t|)    
+(Intercept) 0.204017   0.012456   16.38   <2e-16 ***
+MarApr_H    0.002157   0.000839    2.57    0.011 *  
+MarApr_AVG  0.074807   0.088885    0.84    0.402    
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 0.0236 on 129 degrees of freedom
+  (14 observations deleted due to missingness)
+Multiple R-squared:  0.248,	Adjusted R-squared:  0.237 
+F-statistic: 21.3 on 2 and 129 DF,  p-value: 1e-08
+```  
+**MarApr_H** is shown to be a significant predictor for the revised model (See the code box above). However, the predictive power of this variable is not very strong (slope: 0.002157). We compare the variances of the models. As described below, two models do not have statistcally significant difference, meaning both models are not very predictive.  
+```r   
+# Compare models
+anova(model.1, model.2)
+
+# Results
+Analysis of Variance Table
+
+Model 1: FullSeason_AVG ~ MarApr_AB + MarApr_PA + MarApr_H + MarApr_AVG
+Model 2: FullSeason_AVG ~ MarApr_H + MarApr_AVG
+  Res.Df    RSS Df Sum of Sq    F Pr(>F)
+1    127 0.0716                         
+2    129 0.0717 -2 -8.04e-05 0.07   0.93  
+```  
+
+## Conclusion
 
 
 ## References  
 [1] What is WAR? (2016, November 14) Retrieved from [http://www.fangraphs.com/library/misc/war/](http://www.fangraphs.com/library/misc/war/)  
+[2]  
+[3]  
 [logistic-curve]: https://github.com/liberaliscomputing/phillies-baseball-questionnaire/blob/master/figs/logistic-curve.png
 [hist-ab]: https://github.com/liberaliscomputing/phillies-baseball-questionnaire/blob/master/figs/hist-ab.png
 [diagnostic-plots]: https://github.com/liberaliscomputing/phillies-baseball-questionnaire/blob/master/figs/diagnostic-plots.png
+[correlation]: https://github.com/liberaliscomputing/phillies-baseball-questionnaire/blob/master/figs/correlation.png

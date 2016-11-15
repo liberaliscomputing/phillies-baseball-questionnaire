@@ -50,9 +50,17 @@ model.1 <- lm(FullSeason_AVG ~
             MarApr_AB + 
             MarApr_PA + 
             MarApr_H + 
-            MarApr_AVG, 
-          data)
+            MarApr_AVG,
+          batting)
+summary(model.1)
 
 # Diagnostic plots 
 layout(matrix(c(1, 2, 3, 4), 2, 2)) 
 plot(model.1)
+# Plot correlation
+plot(batting[2:6])
+
+# Remodel linear regression
+model.2 <- lm(FullSeason_AVG ~ MarApr_H + MarApr_AVG, batting)
+summary(model.2)
+
