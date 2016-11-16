@@ -134,6 +134,7 @@ With the revised model, **MarApr_H** is shown to be a significant predictor for 
 The predictions made by these two models are included in [the data sheet](https://github.com/liberaliscomputing/phillies-baseball-questionnaire/tree/master/data/results.csv) (See the last two columns). 
 ## Conclusion
 In this questionnaire, I aimed to describe my analytical appraoches toward making accurate predcitions of batting average in the Major League. To this end, I explored the charicteristics of the data set. Based on this observations, predictors were scaled and corrupted data were imputed to make better predictive analytics. Results showed that the model consisdering all the variables has less predictive power. The revised model showed an enhanced capability in predicting batting average at the end of the season. For the future work, we need to employ more sohisticated variables such as Batting average on balls in play (BABIP) and WAR since they consider multiple aspects in play. 
+## R Code
 Complete code is available [here](https://github.com/liberaliscomputing/phillies-baseball-questionnaire/tree/master/code/predict_batting_average.R).
 ## References  
 [1] What is WAR? (2016, November 14) Retrieved from [http://www.fangraphs.com/library/misc/war/](http://www.fangraphs.com/library/misc/war/)  

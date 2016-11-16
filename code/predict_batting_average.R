@@ -3,9 +3,6 @@
 # Submission: November 15, 2016
 # Candidate: Meen Chul Kim
 
-library('ggplot2')
-library('caret')
-
 # Read in data
 batting <- read.csv('data/batting.csv')
 
@@ -17,7 +14,6 @@ cols <- c('MarApr_AB', 'MarApr_PA', 'MarApr_H')
 for (col in cols) {
   data[[col]] <- data[[col]] / diff(range(data[[col]]))  
 }
-
 
 # Histogram the distributions of MarApr_AB and MarApr_PA
 hist(data$MarApr_AB, prob=T, xlim=c(1, 3), 
