@@ -105,7 +105,7 @@ plot(model.1)
 ![alt text][diagnostic-plots]  
 *Figure 3. Diagnostic plots of the predictive model*  
    
-As shown in the results, all the variables do not have statistically significant in predicting batting average at the end of the season. The diagnostic visualization illustrates this regression model allows too many residuals in finding the fitting line (See Figure 3). By examining correlation plots between variables, we can evidence why this regression modeling is not satisfactory.  
+As shown in the results, all the variables do not have statistically significant in predicting batting average at the end of the season. The diagnostic visualization illustrates this regression model allows too many residuals in finding the optimized fitting line (See Figure 3). By examining correlation plots between variables, we can evidence why this regression modeling is not satisfactory.  
 ```r  
 # Plot correlation
 plot(batting[2:5])
@@ -123,7 +123,8 @@ MarApr_AVG 0.1813621 0.1501031 0.8608918  1.0000000
 ![alt text][correlation-plots]  
 *Figure 4. Diagnostic plots of the predictive model*  
    
-Figure 4 displays correlation plots between predictors. As rendered in the figure, we can intuitively identify correlations between 1) **MarApr_AB** and **MarApr_PA** and 2) **MarApr_H** and **MarApr_AVG** are high (See also the correlation results in the code box). It is often argued that many predictive methods perform better **if highly correlated attributes are removed**. Since, there are two sets of variables highly correlated (>= .75), we need to choose only one variable in one set. To refine the model, we choose **MarApr_PA** and **MarApr_AVG** since they are also less correlated with other predictors.   
+Figure 4 displays correlation plots between predictors. As rendered in the figure, we can intuitively identify correlations between 1) **MarApr_AB** and **MarApr_PA** and 2) **MarApr_H** and **MarApr_AVG** are high (See also the correlation results in the code box aobve). It is often argued that many predictive methods perform better **if highly correlated attributes are removed**. Since there are two sets of variables highly correlated (>= .75), we need to choose only one variable in one set. To refine the model, we choose **MarApr_PA** and **MarApr_AVG** since they are less correlated with other predictors.  
+### Refining Linear Regression   
 ```r
 # Remodel linear regression
 model.2 <- lm(FullSeason_AVG ~ MarApr_PA + MarApr_AVG, batting)
@@ -145,7 +146,7 @@ F-statistic: 19.85 on 2 and 143 DF,  p-value: 2.46e-08
 With the revised model, **MarApr_AVG** is shown to be a significant predictor within a 99.9% confidence interval (See the code box above). The predictive power became stronger (former slope: 1.94e-01, current slope: 0.255364). **MarApr_PA** also appears to be statistically significant while having the increased predictive power (former slope: 6.94e-05, current slope: 0.021737).
 The predictions made by these two models are included in [the data sheet](https://github.com/liberaliscomputing/phillies-baseball-questionnaire/tree/master/data/results.csv) (See the last two columns). 
 ## Conclusion
-In this questionnaire, I aimed to describe my analytical appraoches toward making accurate predcitions of batting average in the Major League. To this end, I explored the charicteristics of the data set. Based on this observations, predictors were scaled and corrupted data were imputed to make better predictive analytics. Results showed that the model consisdering all the variables has less predictive power. The revised model showed an enhanced capability in predicting batting average at the end of the season. For the future work, we need to examine more or compounding variables such as Batting average on balls in play (BABIP) and WAR since they consider a variety of aspects in play. 
+In this questionnaire, I aimed to describe my analytical appraoches toward making accurate predcitions of batting average in the Major League. To this end, I explored the charicteristics of the data set. Based on this observations, predictors were scaled and corrupted data were imputed to make better predictive analytics. Results showed that the model consisdering all the variables has less predictive power. By removing highly correlated variables, I refined the model. The revised model showed an enhanced capability in predicting batting average at the end of the season. For the future work, we need to examine more or compounding variables such as Batting average on balls in play (BABIP) and WAR since they consider a variety of aspects in play. 
 ## R Code
 Complete code is available [here](https://github.com/liberaliscomputing/phillies-baseball-questionnaire/tree/master/code/predict_batting_average.R).
 ## References  
