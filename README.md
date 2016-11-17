@@ -49,6 +49,7 @@ lines(density(data$MarApr_PA))
 ```  
 ![alt text][hist-ab]  
 *Figure 2. Normal distribution of MarApr_AB and MarApr_PA*  
+   
 As shown in Figure 2, the variable **player's at bats in March and April 2016** is **normally distributed**. Other predictors also follow the normal distribution. Therefore, we impute means to corrupted values.
 ```r
 # Convert corruted data to NA
@@ -103,6 +104,7 @@ plot(model.1)
 ```  
 ![alt text][diagnostic-plots]  
 *Figure 3. Diagnostic plots of the predictive model*  
+   
 As shown in the results, all the variables do not have statistically significant in predicting batting average at the end of the season. The diagnostic visualization illustrates this regression model allows too many residuals in finding the fitting line (See Figure 3). By examining correlation plots between variables, we can evidence why this regression modeling is not satisfactory.  
 ```r  
 # Plot correlation
@@ -120,6 +122,7 @@ MarApr_AVG 0.1813621 0.1501031 0.8608918  1.0000000
 ```  
 ![alt text][correlation-plots]  
 *Figure 4. Diagnostic plots of the predictive model*  
+   
 Figure 4 displays correlation plots between predictors. As rendered in the figure, we can intuitively identify correlations between 1) **MarApr_AB** and **MarApr_PA** and 2) **MarApr_H** and **MarApr_AVG** are high (See also the correlation results in the code box). It is often argued that many predictive methods perform better **if highly correlated attributes are removed**. Since, there are two sets of variables highly correlated (>= .75), we need to choose only one variable in one set. To refine the model, we choose **MarApr_PA** and **MarApr_AVG** since they are also less correlated with other predictors.   
 ```r
 # Remodel linear regression
