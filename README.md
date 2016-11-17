@@ -48,9 +48,9 @@ hist(data$MarApr_PA, add=T, prob=T, col=rgb(0, 1, 0, .25))
 lines(density(data$MarApr_PA))
 ```  
 ![alt text][hist-ab]  
-*Figure 2. Normal distribution of MarApr_AB and MarApr_PA*  
+*Figure 2. Normal distribution of MarApr_AB (in red) and MarApr_PA (in green)*  
    
-As shown in Figure 2, the variable **player's at bats in March and April 2016** is **normally distributed**. Other predictors also follow the normal distribution. Therefore, we impute means to corrupted values.
+As shown in Figure 2, the variables **MarApr_AB** and **MarApr_PA** are **normally distributed**. Other predictors also follow the normal distribution. Therefore, we impute means to corrupted values.
 ```r
 # Convert corruted data to NA
 batting[batting == 0] <- NA
