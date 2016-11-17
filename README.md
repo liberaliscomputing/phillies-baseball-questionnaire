@@ -121,7 +121,7 @@ MarApr_H   0.6474490 0.5610167 1.0000000  0.8608918
 MarApr_AVG 0.1813621 0.1501031 0.8608918  1.0000000  
 ```  
 ![alt text][correlation-plots]  
-*Figure 4. Diagnostic plots of the predictive model*  
+*Figure 4. Corrleation plots between predictors*  
    
 Figure 4 displays correlation plots between predictors. As rendered in the figure, we can intuitively identify correlations between 1) **MarApr_AB** and **MarApr_PA** and 2) **MarApr_H** and **MarApr_AVG** are high (See also the correlation results in the code box aobve). It is often argued that many predictive methods perform better **if highly correlated attributes are removed**. Since there are two sets of variables highly correlated (>= .75), we need to choose only one variable in one set. To refine the model, we choose **MarApr_PA** and **MarApr_AVG** since they are less correlated with other predictors.  
 ### Refining Linear Regression   
