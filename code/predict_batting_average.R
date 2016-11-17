@@ -37,6 +37,7 @@ for (col in cols) {
   batting[[col]][is.na(batting[[col]])] <- 
     mean(batting[[col]], na.rm = T)
 }
+
 # Manual imputation for MarApr_AVG
 batting$MarApr_AVG[is.na(batting$MarApr_AVG)] <- 
   mean(batting$MarApr_AVG, na.rm = T)
