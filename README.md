@@ -33,7 +33,7 @@ Before examining the distribution of data, we need to rescale the data. The data
 # Scale variables by dividing by range
 cols <- c('MarApr_AB', 'MarApr_PA', 'MarApr_H')
 for (col in cols) {
-  data[[col]] <- data[[col]] / max(range(data[[col]]))  
+  data[[col]] <- data[[col]] / diff(range(data[[col]]))  
 }
 ```
 ### Data Imputation
@@ -41,7 +41,7 @@ To fix corrupted data, we need to understand the distribution of data. If it is 
 ```r
 # Histogram the distributions
 hist(data$MarApr_AB, prob=T, xlim=c(1, 3), 
-     xlab='Scaled predictors', ylab = 'Probatilty', main='',
+     xlab='Scaled predictors', ylab = 'Density', main='',
      col=rgb(1, 0, 0, .25))
 lines(density(data$MarApr_AB))
 hist(data$MarApr_PA, add=T, prob=T, col=rgb(0, 1, 0, .25))
@@ -105,7 +105,7 @@ plot(model.1)
 ![alt text][diagnostic-plots]  
 *Figure 3. Diagnostic plots of the predictive model*  
    
-As shown in the results, all the variables do not have statistically significant in predicting batting average at the end of the season. The diagnostic visualization illustrates this regression model allows too many residuals in finding the optimized fitting line (See Figure 3). By examining correlation plots between variables, we can evidence why this regression modeling is not satisfactory.  
+As shown in the results, all the variables do not have statistically significant in predicting batting average at the end of the season. The diagnostic visualization illustrates this regression model allows too many residuals in finding the optimized fitting line (See Figure 3). By examining correlation plots between variables, we can evidence why this regression model is not satisfactory.  
 ```r  
 # Plot correlation
 plot(batting[2:5])
@@ -146,7 +146,7 @@ F-statistic: 19.85 on 2 and 143 DF,  p-value: 2.46e-08
 With the revised model, **MarApr_AVG** is shown to be a significant predictor within a 99.9% confidence interval (See the code box above). The predictive power became stronger (former slope: 1.94e-01, current slope: 0.255364). **MarApr_PA** also appears to be statistically significant while having the increased predictive power (former slope: 6.94e-05, current slope: 0.021737).
 The predictions made by these two models are included in [the results sheet](https://github.com/liberaliscomputing/phillies-baseball-questionnaire/tree/master/data/results.csv) (See the last two columns). 
 ## Conclusion
-In this questionnaire, I aimed to describe my analytical appraoches toward making accurate predcitions of batting average in the Major League. To this end, I explored the charicteristics of the data set. Based on this observations, predictors were scaled and corrupted data were imputed to make better predictive analytics. Results showed that the model consisdering all the variables has less predictive power. By removing highly correlated variables, I refined the model. The revised model showed an enhanced capability in predicting batting average at the end of the season. For the future work, we need to examine more or compounding variables such as Batting average on balls in play (BABIP) and WAR since they consider a variety of aspects in play. Smapling larger statistics will also help to build a more predictive model.  
+In this questionnaire, I aimed to describe my analytical appraoches toward making accurate predcitions of batting average in the Major League. To this end, I explored the charicteristics of the data set. Based on this observation, predictors were re-scaled and corrupted data were imputed to make better predictive analytics. Results showed that the model consisdering all the variables has less predictive power. By removing highly correlated variables, I refined the model. The revised model showed an enhanced capability in predicting batting average at the end of the season. For the future work, we need to examine more or compounding variables such as Batting average on balls in play (BABIP) and WAR since they consider a variety of aspects in play. Sampling larger statistics will also help to build a more predictive model.  
 ## R Code
 Complete code is available [here](https://github.com/liberaliscomputing/phillies-baseball-questionnaire/tree/master/code/predict_batting_average.R).
 ## References  
