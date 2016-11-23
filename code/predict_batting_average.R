@@ -17,7 +17,7 @@ est.war <- seq(-8, 8, 0.1)
 prob <- sigmoid(est.war)
 
 # Plot logistic regression
-col.func <- colorRampPalette(c("red", "white", "blue"))
+col.func <- colorRampPalette(c("blue", "white", "red"))
 plot(est.war, prob, 
      xlab='Estimated wins above replacement (WAR)', 
      ylab='Likelihood of success (promotion)',
