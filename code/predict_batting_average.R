@@ -1,8 +1,31 @@
-# Candidate’s Choice Question 
+# Phillies Baseball R&D Questionnaire
 #   for the Senior Quantitative Analyst Position at Philadelphia Phillies
 # Submission: November 15, 2016
 # Candidate: Meen Chul Kim
 
+
+# Required Question
+# Define sigmoid function
+sigmoid <- function(val) {
+  return((1 + exp(-val)) ** -1)
+}
+
+# Generate mock-up WARs
+est.war <- seq(-8, 8, 0.1)
+
+# Return probability of success
+prob <- sigmoid(est.war)
+
+# Plot logistic regression
+col.func <- colorRampPalette(c("red", "white", "blue"))
+plot(est.war, prob, 
+     xlab='Estimated wins above replacement (WAR)', 
+     ylab='Likelihood of success (promotion)',
+     col=col.func(length(prob)),
+     pch=16, cex=.75)
+
+
+# Candidate's Choice Question
 # Read in data
 batting <- read.csv('data/batting.csv')
 
